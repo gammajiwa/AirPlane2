@@ -1334,6 +1334,9 @@ MonoBehaviour:
   objectpool: {fileID: 546977781}
   enemySpawner: {fileID: 742158277}
   uiManager: {fileID: 1708183469}
+  buffEffect:
+  - {fileID: 8831736244758398689, guid: 16fc40bfef9490d4c80a28178f1a6660, type: 3}
+  - {fileID: 8831736244758398689, guid: d98f927aa749c1f41af6d2a352fa2758, type: 3}
 --- !u!4 &1473880673
 Transform:
   m_ObjectHideFlags: 0
@@ -1380,10 +1383,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AttackDamage: 2
-  HPUnit: 10
-  SpeedMovement: 5
-  intervalAttack: 0.1
   ProjectilePosition: {fileID: 1280989515}
+  playerID: 0
 --- !u!4 &1569454556
 Transform:
   m_ObjectHideFlags: 0

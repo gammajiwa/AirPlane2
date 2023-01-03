@@ -1,11 +1,10 @@
 using System;
 using UnityEngine;
 
-public class Enemy : Unit 
+public class Enemy : Unit
 {
-	public delegate void ShootEnemy(Enemy enemy, float damage, Quaternion rotation);
+	public delegate void ShootEnemy(Enemy enemy, float damage, Quaternion rotation, ProjectileType type);
 	public delegate void EnemyDamage(Enemy enemy, float damage);
-	public Action<Enemy> EnemyDeactivateEvent;
 	public EnemyDamage EnemyDamageEvent;
 	public ShootEnemy ShootEnemyEvent;
 
@@ -13,7 +12,6 @@ public class Enemy : Unit
 	public Transform ProjectilePosition;
 	public Color ProjectileColor;
 	private float backToPool = -6f;
-	private float hpEnemy;
 
 	protected override void UnitUpdate() {
 		EnemyMovement();
@@ -24,31 +22,28 @@ public class Enemy : Unit
 		transform.Translate(Vector2.down * (Time.deltaTime * SpeedMovement));
 	}
 
-	protected override void Initialized() {
-		HPUnit = EnemyData.GetFloat(enemyID, EnemyParameter.HP);
-		SpeedMovement = EnemyData.GetFloat(enemyID, EnemyParameter.MoveSpeed);
-		AttackDamage = EnemyData.GetFloat(enemyID, EnemyParameter.Damage);
-		intervalAttack = EnemyData.GetFloat(enemyID, EnemyParameter.IntervalAttack);
-		hpEnemy = HPUnit;
-	}
-
 	private void BackToPool() {
 		if (transform.position.y <= backToPool)
 			DeactivateEnemy();
 	}
 
 	public void EnemyGetDamage(float damage) {
-		hpEnemy -= damage;
-		if (hpEnemy <= 0) {
-			hpEnemy = HPUnit;
+		HPUnit -= damage;
+		if (HPUnit <= 0) {
+			HPUnit = EnemyData.GetFloat(enemyID, EnemyParameter.HP);
 			DeactivateEnemy();
 		}
 	}
 
 	public void DeactivateEnemy() {
 		ReturnToPool();
-		transform.position = new Vector2(0, -7);
-		EnemyDeactivateEvent?.Invoke(this);
+	}
+
+	public void Initialize(EnemyID cachedUnitID) {
+		HPUnit = EnemyData.GetFloat(enemyID, EnemyParameter.HP);
+		SpeedMovement = EnemyData.GetFloat(enemyID, EnemyParameter.MoveSpeed);
+		AttackDamage = EnemyData.GetFloat(enemyID, EnemyParameter.Damage);
+		intervalAttack = EnemyData.GetFloat(enemyID, EnemyParameter.IntervalAttack);
 	}
 
 }

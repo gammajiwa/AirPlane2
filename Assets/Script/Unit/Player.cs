@@ -7,7 +7,11 @@ public class Player : Unit
 	public Action<float> DamagePlayerEvent;
 
 	public Transform ProjectilePosition;
+	[SerializeField] private PlayerID playerID;
 
+	private void Start() {
+		Initialize();
+	}
 	protected override void UnitUpdate() {
 		PlayerMovement();
 	}
@@ -37,11 +41,18 @@ public class Player : Unit
 
 	public void ResetPlayerData() {
 		transform.position = new Vector2(0, transform.position.y);
-		HPUnit = 10;
+		Initialize();
 		nextShoot = 0;
 	}
 
 	protected override void SetProjectile() {
 		ShootEvent.Invoke();
+	}
+
+	public void Initialize() {
+		HPUnit = PlayerData.GetFloat(playerID, PlayerParameter.HP);
+		SpeedMovement = PlayerData.GetFloat(playerID, PlayerParameter.MoveSpeed);
+		AttackDamage = PlayerData.GetFloat(playerID, PlayerParameter.Damage);
+		intervalAttack = PlayerData.GetFloat(playerID, PlayerParameter.IntervalAttack);
 	}
 }

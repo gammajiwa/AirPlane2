@@ -83,10 +83,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5da0d787f1c62b64b8694bfd013e8d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  projectileType: 0
   projectileColor: {fileID: 2236925251958871146}
   damage: 0
   speedProjectile: 6
-  projectileID: 1
+  buffEffect: []
 --- !u!1 &2236925251958871144
 GameObject:
   m_ObjectHideFlags: 0

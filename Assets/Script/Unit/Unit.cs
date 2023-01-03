@@ -2,21 +2,16 @@ using UnityEngine;
 
 public class Unit : PooledObject
 {
-	public float AttackDamage;
-	[SerializeField] protected private float HPUnit;
-	[SerializeField] protected private float SpeedMovement;
-	[SerializeField] protected private float intervalAttack;
+	[HideInInspector] public float AttackDamage;
+	protected private float HPUnit;
+	protected private float SpeedMovement;
 	protected private float nextShoot = 0;
+	protected private float intervalAttack;
 
-	private void Start() {
-		Initialized();
-	}
 	private void Update() {
 		AttackFire();
 		UnitUpdate();
 	}
-
-	protected virtual void Initialized() { }
 
 	private void AttackFire() {
 		nextShoot -= 1 * Time.deltaTime;
@@ -29,7 +24,5 @@ public class Unit : PooledObject
 	protected virtual void UnitUpdate() { }
 
 	protected virtual void SetProjectile() { }
-
-	public void Initialize(EnemyID cachedUnitID) { }
 
 }

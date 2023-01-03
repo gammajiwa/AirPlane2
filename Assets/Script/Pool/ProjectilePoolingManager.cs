@@ -14,7 +14,7 @@ public class ProjectilePoolingManager : MonoBehaviour
 		}
 	}
 
-	public BaseProjectile Spawn(ProjectileID projectileID, Vector3 position, Quaternion rotation, float damage, Color color) {
-		return projectiles[projectileID].Spawn(position, rotation, damage, color);
+	public BaseProjectile Spawn(ProjectileID projectileID, Vector3 position, Quaternion rotation, float damage, Color color, ProjectileType type) {
+		return projectiles[projectileID].Spawn(position, rotation, damage, color, type);
 	}
 }

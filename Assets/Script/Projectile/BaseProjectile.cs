@@ -1,18 +1,19 @@
 using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class BaseProjectile : PooledObject
 {
-	public Action<BaseProjectile> ProjectileDeactivateEvent;
+	public delegate void DebuffProjectile(BaseProjectile projectile, BuffID buffID);
+	public DebuffProjectile DebuffProjectileEvent;
+	public Action<BaseProjectile> DestructibleEvent;
 
+	public ProjectileType projectileType;
 	public Renderer projectileColor;
-	public float damage;
-	[SerializeField] protected private float speedProjectile;
-	[SerializeField] private ProjectileID projectileID;
-
-	private void Start() {
-		speedProjectile = ProjectileData.GetFloat(projectileID, ProjectileParameter.Speed);
-	}
+	[HideInInspector] public float damage;
+	protected private float speedProjectile;
+	protected private List<Buff> buffEffects = new List<Buff>();
+	private float BaseSpeed;
 
 	private void Update() {
 		ProjectileMove();
@@ -25,16 +26,45 @@ public class BaseProjectile : PooledObject
 		}
 	}
 
-	public void Initialize(ProjectileID cachedUnitID) { }
+	public void Initialize(ProjectileID cachedUnitID) {
+		BaseSpeed = ProjectileData.GetFloat(cachedUnitID, ProjectileParameter.Speed);
+		speedProjectile = BaseSpeed;
+	}
 
-	public void Reinitialize(float damage, Color color) {
+	public void Reinitialize(float damage, Color color, ProjectileType type) {
 		this.damage = damage;
+		speedProjectile = BaseSpeed;
 		projectileColor.GetComponent<SpriteRenderer>().color = color;
+		projectileType = type;
+		buffEffects.Clear();
 	}
 
 	public void DeactivateProjectile() {
 		ReturnToPool();
-		transform.position = new Vector2(0, -7);
-		ProjectileDeactivateEvent?.Invoke(this);
+	}
+
+	public void DebuffEffect(Buff buff, float value) {
+		switch (buff.buffID) {
+			case BuffID.Buff001:
+				if (!IsBuffed(buff.buffID)) {
+					speedProjectile /= value;
+					buffEffects.Add(buff);
+				}
+				break;
+			case BuffID.Buff002:
+				if (!IsBuffed(buff.buffID)) {
+					damage /= value;
+					buffEffects.Add(buff);
+				}
+				break;
+		}
+	}
+
+	private bool IsBuffed(BuffID buffID) {
+		for (int i = 0; i < buffEffects.Count; i++) {
+			if (buffEffects[i].buffID == buffID)
+				return true;
+		}
+		return false;
 	}
 }
