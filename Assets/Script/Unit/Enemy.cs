@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Enemy : Unit
 {
-	public delegate void ShootEnemy(Enemy enemy, float damage, Quaternion rotation, ProjectileType type);
+	public delegate void ShootEnemy(Enemy enemy, float damage, Quaternion rotation, ProjectileID projectileID);
 	public delegate void EnemyDamage(Enemy enemy, float damage);
 	public EnemyDamage EnemyDamageEvent;
 	public ShootEnemy ShootEnemyEvent;

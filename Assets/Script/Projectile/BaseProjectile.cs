@@ -8,7 +8,7 @@ public class BaseProjectile : PooledObject
 	public DebuffProjectile DebuffProjectileEvent;
 	public Action<BaseProjectile> DestructibleEvent;
 
-	public ProjectileType projectileType;
+	[HideInInspector] public ProjectileID projectileID;
 	public Renderer projectileColor;
 	[HideInInspector] public float damage;
 	protected private float speedProjectile;
@@ -29,13 +29,13 @@ public class BaseProjectile : PooledObject
 	public void Initialize(ProjectileID cachedUnitID) {
 		BaseSpeed = ProjectileData.GetFloat(cachedUnitID, ProjectileParameter.Speed);
 		speedProjectile = BaseSpeed;
+		projectileID = cachedUnitID;
 	}
 
-	public void Reinitialize(float damage, Color color, ProjectileType type) {
+	public void Reinitialize(float damage, Color color) {
 		this.damage = damage;
 		speedProjectile = BaseSpeed;
 		projectileColor.GetComponent<SpriteRenderer>().color = color;
-		projectileType = type;
 		buffEffects.Clear();
 	}
 

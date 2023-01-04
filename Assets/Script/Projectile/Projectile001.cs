@@ -10,19 +10,19 @@ public class Projectile001 : BaseProjectile
 		}
 		BaseProjectile baseProjectile = collision.gameObject.GetComponent<BaseProjectile>();
 		if (!(baseProjectile is null)) {
-			switch (baseProjectile.projectileType) {
-				case ProjectileType.Normal:
+			switch (baseProjectile.projectileID) {
+				case ProjectileID.Projectile001:
 					break;
-				case ProjectileType.Destructible:
+				case ProjectileID.Projectile002:
+					DebuffProjectileEvent?.Invoke(baseProjectile, BuffID.Buff001);
+					DebuffProjectileEvent?.Invoke(baseProjectile, BuffID.Buff002);
+					break;
+				case ProjectileID.Projectile003:
 					ReturnToPool();
 					DestructibleEvent?.Invoke(baseProjectile);
 					break;
-				case ProjectileType.Blocking:
+				case ProjectileID.Projectile004:
 					ReturnToPool();
-					break;
-				case ProjectileType.Debuff:
-					DebuffProjectileEvent?.Invoke(baseProjectile, BuffID.Buff001);
-					DebuffProjectileEvent?.Invoke(baseProjectile, BuffID.Buff002);
 					break;
 			}
 		}

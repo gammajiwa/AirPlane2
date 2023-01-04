@@ -14,8 +14,8 @@ public class ObjectPoolingManager : MonoBehaviour
 		return EnemyPoolingManager.Spawn(enemyID, position);
 	}
 
-	public BaseProjectile ProjectileSpawn(ProjectileID projectileID, Vector3 position, Quaternion rotation, float damage, Color color, ProjectileType type) {
-		return projectilesPoolingManager.Spawn(projectileID, position, rotation, damage, color, type);
+	public BaseProjectile ProjectileSpawn(ProjectileID projectileID, Vector3 position, Quaternion rotation, float damage, Color color) {
+		return projectilesPoolingManager.Spawn(projectileID, position, rotation, damage, color);
 	}
 }
 

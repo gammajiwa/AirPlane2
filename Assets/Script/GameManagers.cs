@@ -36,12 +36,12 @@ public class GameManagers : MonoBehaviour
 		}
 	}
 
-	private void OnEnemyAttack(Enemy enemy, float damage, Quaternion rotation, ProjectileType type) {
-		SetProjectile(ProjectileID.Projectile002, enemy.ProjectilePosition.position, rotation, enemy.AttackDamage, enemy.ProjectileColor, type);
+	private void OnEnemyAttack(Enemy enemy, float damage, Quaternion rotation, ProjectileID projectileID) {
+		SetProjectile(projectileID, enemy.ProjectilePosition.position, rotation, enemy.AttackDamage, enemy.ProjectileColor);
 	}
 
 	private void OnPlayerAttack() {
-		SetProjectile(ProjectileID.Projectile001, player.ProjectilePosition.position, Quaternion.identity, player.AttackDamage, Color.yellow, ProjectileType.Normal);
+		SetProjectile(ProjectileID.Projectile001, player.ProjectilePosition.position, Quaternion.identity, player.AttackDamage, Color.yellow);
 	}
 
 	private void OnSpawnEnemy(float position, EnemyID enemyType) {
@@ -55,8 +55,8 @@ public class GameManagers : MonoBehaviour
 	}
 
 
-	private void SetProjectile(ProjectileID enumTypePool, Vector3 position, Quaternion rotation, float damage, Color color, ProjectileType type) {
-		BaseProjectile projectile = objectpool.ProjectileSpawn(enumTypePool, position, rotation, damage, color, type);
+	private void SetProjectile(ProjectileID enumTypePool, Vector3 position, Quaternion rotation, float damage, Color color) {
+		BaseProjectile projectile = objectpool.ProjectileSpawn(enumTypePool, position, rotation, damage, color);
 		if (projectile.IsNotInitialized()) {
 			projectile.Initialize(enumTypePool);
 			projectile.DestructibleEvent += OnDestructibleProjectile;

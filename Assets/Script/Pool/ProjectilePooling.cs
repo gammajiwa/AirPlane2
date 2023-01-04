@@ -8,9 +8,9 @@ public class ProjectilePooling : BaseObjectPooling<BaseProjectile>
 		Initialize();
 	}
 
-	public BaseProjectile Spawn(Vector3 position, Quaternion rotation, float damage, Color color, ProjectileType type) {
+	public BaseProjectile Spawn(Vector3 position, Quaternion rotation, float damage, Color color) {
 		BaseProjectile projectile = SpawnFromPool(position, rotation);
-		projectile.Reinitialize(damage, color, type);
+		projectile.Reinitialize(damage, color);
 		return projectile;
 	}
 }
