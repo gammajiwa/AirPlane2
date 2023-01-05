@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Projectile003 : BaseProjectile
+public class EnemyProjectile : BaseProjectile
 {
 	private void OnTriggerEnter2D(Collider2D collision) {
 		Player player = collision.gameObject.GetComponent<Player>();

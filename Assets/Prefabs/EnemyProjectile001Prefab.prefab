@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2236925251892360283}
   - component: {fileID: 2818715448269929120}
   - component: {fileID: 4029159622054697877}
-  - component: {fileID: 556962331199588660}
+  - component: {fileID: 2779970989766358810}
   m_Layer: 0
-  m_Name: Projectile003Prefab
+  m_Name: EnemyProjectile001Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -71,7 +71,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &556962331199588660
+--- !u!114 &2779970989766358810
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,10 +80,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2236925251892360282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7ad030ed1702f0a42a9e3b3ae05c4e41, type: 3}
+  m_Script: {fileID: 11500000, guid: 5da0d787f1c62b64b8694bfd013e8d7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileID: 2
+  projectileID: 1
   projectileColor: {fileID: 2236925251958871146}
   damage: 0
 --- !u!1 &2236925251958871144
@@ -158,7 +158,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 1, b: 0.2243948, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

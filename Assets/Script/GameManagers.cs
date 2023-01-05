@@ -9,15 +9,11 @@ public class GameManagers : MonoBehaviour
 	[SerializeField] private ObjectPoolingManager objectpool;
 	[SerializeField] private EnemySpawner enemySpawner;
 	[SerializeField] private UIManager uiManager;
-	[SerializeField] private List<Buff> buffEffect = new List<Buff>();
 	private List<Enemy> enemies = new List<Enemy>();
 	private List<BaseProjectile> projectiles = new List<BaseProjectile>();
 
 
 	private void Start() {
-		for (int i = 0; i < buffEffect.Count; i++) {
-			buffEffect[i].value = BuffsData.GetFloat(buffEffect[i].buffID, BuffParameter.Value);
-		}
 		player.ShootEvent += OnPlayerAttack;
 		player.DamagePlayerEvent += OnPlayerGetDamage;
 		enemySpawner.SpawnEnemyEvent += OnSpawnEnemy;
@@ -37,11 +33,11 @@ public class GameManagers : MonoBehaviour
 	}
 
 	private void OnEnemyAttack(Enemy enemy, float damage, Quaternion rotation, ProjectileID projectileID) {
-		SetProjectile(projectileID, enemy.ProjectilePosition.position, rotation, enemy.AttackDamage, enemy.ProjectileColor);
+		SetProjectile(projectileID, enemy.ProjectilePosition.position, rotation, enemy.AttackDamage);
 	}
 
 	private void OnPlayerAttack() {
-		SetProjectile(ProjectileID.Projectile001, player.ProjectilePosition.position, Quaternion.identity, player.AttackDamage, Color.yellow);
+		SetProjectile(ProjectileID.Projectile001, player.ProjectilePosition.position, Quaternion.identity, player.AttackDamage);
 	}
 
 	private void OnSpawnEnemy(float position, EnemyID enemyType) {
@@ -55,22 +51,19 @@ public class GameManagers : MonoBehaviour
 	}
 
 
-	private void SetProjectile(ProjectileID enumTypePool, Vector3 position, Quaternion rotation, float damage, Color color) {
-		BaseProjectile projectile = objectpool.ProjectileSpawn(enumTypePool, position, rotation, damage, color);
+	private void SetProjectile(ProjectileID enumTypePool, Vector3 position, Quaternion rotation, float damage) {
+		BaseProjectile projectile = objectpool.ProjectileSpawn(enumTypePool, position, rotation);
 		if (projectile.IsNotInitialized()) {
 			projectile.Initialize(enumTypePool);
 			projectile.DestructibleEvent += OnDestructibleProjectile;
 			projectile.DebuffProjectileEvent += OnDebuffProjectile;
+			projectile.SetDamage(damage);
 		}
 		projectiles.Add(projectile);
 	}
 
 	private void OnDebuffProjectile(BaseProjectile baseProjectile, BuffID buffID) {
-		for (int i = 0; i < buffEffect.Count; i++) {
-			if (buffEffect[i].buffID == buffID) {
-				baseProjectile.DebuffEffect(buffEffect[i], buffEffect[i].value);
-			}
-		}
+		baseProjectile.DebuffEffect(buffID);
 	}
 
 	private void OnDestructibleProjectile(BaseProjectile baseProjectile) {

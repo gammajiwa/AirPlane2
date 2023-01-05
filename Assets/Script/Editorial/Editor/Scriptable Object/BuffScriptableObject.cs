@@ -10,6 +10,7 @@ public class BuffScriptableObject : BaseScriptableObject    // Change ID enum, a
 	[HorizontalGroup("General/Split", 0.8f, LabelWidth = 135)]
 	[VerticalGroup("General/Split/Left")] [ReadOnly] public BuffID ID;
 	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float Value;
+	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float Duration;
 
 	private string filePath = BuffsData.GetFilePath();  // Change this to corresponding Data class
 
@@ -26,6 +27,7 @@ public class BuffScriptableObject : BaseScriptableObject    // Change ID enum, a
 		JSONNode data = jSONNode;
 
 		GetFloat(data, "Value", out Value);
+		GetFloat(data, "Duration", out Duration);
 
 		AssetDatabase.Refresh();
 		ValueSet();
@@ -35,6 +37,7 @@ public class BuffScriptableObject : BaseScriptableObject    // Change ID enum, a
 		JSONObject json = new JSONObject();
 
 		SetFloat(Value, "Value", ref json);
+		SetFloat(Duration, "Duration", ref json);
 		SaveFile($"Assets/Resources/{filePath}", ID.ToString(), json.ToString());
 		AssetDatabase.Refresh();
 		ValueSet();

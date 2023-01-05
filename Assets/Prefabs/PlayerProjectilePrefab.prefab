@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 2236925251892360283}
   - component: {fileID: 2818715448269929120}
   - component: {fileID: 4029159622054697877}
-  - component: {fileID: 2779970989766358810}
+  - component: {fileID: 1658977973282075252}
   m_Layer: 0
-  m_Name: Projectile002Prefab
+  m_Name: PlayerProjectilePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 2236925251892360282}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.76, y: 1.31, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2236925251958871145}
   m_Father: {fileID: 0}
@@ -49,7 +49,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.09
+  m_Radius: 0.15
 --- !u!50 &4029159622054697877
 Rigidbody2D:
   serializedVersion: 4
@@ -71,7 +71,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &2779970989766358810
+--- !u!114 &1658977973282075252
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,12 +80,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 2236925251892360282}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5da0d787f1c62b64b8694bfd013e8d7a, type: 3}
+  m_Script: {fileID: 11500000, guid: 65abbc90611f14547a63c03a2de71ca4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  projectileID: 1
+  projectileType: 0
   projectileColor: {fileID: 2236925251958871146}
   damage: 0
+  speedProjectile: 10
+  buffEffect:
+  - {fileID: 8831736244758398689, guid: 16fc40bfef9490d4c80a28178f1a6660, type: 3}
+  - {fileID: 8831736244758398689, guid: d98f927aa749c1f41af6d2a352fa2758, type: 3}
 --- !u!1 &2236925251958871144
 GameObject:
   m_ObjectHideFlags: 0
@@ -112,7 +116,7 @@ Transform:
   m_GameObject: {fileID: 2236925251958871144}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 2236925251892360283}
   m_RootOrder: 0
@@ -158,7 +162,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9039522, b: 0, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
