@@ -3,10 +3,10 @@ using UnityEngine;
 public class Unit : PooledObject
 {
 	[HideInInspector] public float AttackDamage;
-	protected private float HPUnit;
-	protected private float SpeedMovement;
-	protected private float nextShoot = 0;
-	protected private float intervalAttack;
+	protected float HPUnit;
+	protected float SpeedMovement;
+	protected float nextShoot = 0;
+	protected float intervalAttack;
 
 	private void Update() {
 		AttackFire();

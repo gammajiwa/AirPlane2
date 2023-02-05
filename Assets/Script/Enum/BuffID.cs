@@ -6,4 +6,6 @@ public enum BuffID
 {
     Buff001,
     Buff002,
+    Buff003,
+    Buff004,
 }

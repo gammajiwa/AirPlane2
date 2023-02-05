@@ -7,6 +7,7 @@ public class Enemy : Unit
 	public delegate void EnemyDamage(Enemy enemy, float damage);
 	public EnemyDamage EnemyDamageEvent;
 	public ShootEnemy ShootEnemyEvent;
+	public Action EnemyDestroyedEvent;
 
 	public EnemyID enemyID;
 	public Transform ProjectilePosition;
@@ -32,6 +33,7 @@ public class Enemy : Unit
 		if (HPUnit <= 0) {
 			HPUnit = EnemyData.GetFloat(enemyID, EnemyParameter.HP);
 			DeactivateEnemy();
+			EnemyDestroyedEvent.Invoke();
 		}
 	}
 

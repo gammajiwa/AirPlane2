@@ -26,5 +26,9 @@ public class PlayerProjectile : BaseProjectile
 					break;
 			}
 		}
+		Boss boss = collision.gameObject.GetComponent<Boss>();
+		if (!(boss is null)) {
+			ReturnToPool();
+		}
 	}
 }

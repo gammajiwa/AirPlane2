@@ -13,6 +13,7 @@ public class PlayerScriptableObject : BaseScriptableObject    // Change ID enum,
 	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float MoveSpeed;
 	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float Damage;
 	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float IntervalAttack;
+	[VerticalGroup("General/Split/Left")] [OnValueChanged("ValueChanged")] public float SpecialMovementDuration ;
 
 	private string filePath = PlayerData.GetFilePath();	// Change this to corresponding Data class
 
@@ -31,6 +32,7 @@ public class PlayerScriptableObject : BaseScriptableObject    // Change ID enum,
 		GetFloat(data, "MoveSpeed", out MoveSpeed);
 		GetFloat(data, "Damage", out Damage);
 		GetFloat(data, "IntervalAttack", out IntervalAttack);
+		GetFloat(data, "SpecialMovementDuration", out SpecialMovementDuration);
 
 		AssetDatabase.Refresh();
 		ValueSet();
@@ -43,6 +45,7 @@ public class PlayerScriptableObject : BaseScriptableObject    // Change ID enum,
 		SetFloat(MoveSpeed, "MoveSpeed", ref json);
 		SetFloat(Damage, "Damage", ref json);
 		SetFloat(IntervalAttack, "IntervalAttack", ref json);
+		SetFloat(SpecialMovementDuration, "SpecialMovementDuration", ref json);
 		SaveFile($"Assets/Resources/{filePath}", ID.ToString(), json.ToString());
 		AssetDatabase.Refresh();
 		ValueSet();

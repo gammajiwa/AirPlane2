@@ -6,5 +6,5 @@ public enum PlayerParameter
 	MoveSpeed,
 	Damage,
 	IntervalAttack,
-
+	SpecialMovementDuration,
 }

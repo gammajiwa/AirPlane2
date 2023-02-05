@@ -9,7 +9,7 @@ public class Buff {
 	public float duration;
 
 
-	public void AddBuff(BuffID buffID, float value, float duration) {
+	public Buff(BuffID buffID, float value, float duration) {
 		this.buffID = buffID;
 		this.value = value;
 		this.duration = duration;

@@ -9,10 +9,9 @@ public class BaseProjectile : PooledObject
 	public Action<BaseProjectile> DestructibleEvent;
 
 	[HideInInspector] public ProjectileID projectileID;
-	public Renderer projectileColor;
 	[HideInInspector] public float damage;
-	protected private float speedProjectile;
-	protected private List<Buff> buffEffects = new List<Buff>();
+	protected List<Buff> buffEffects = new List<Buff>();
+	protected float speedProjectile;
 	private float baseDamage;
 
 	private void Update() {
@@ -53,9 +52,7 @@ public class BaseProjectile : PooledObject
 					damage /= BuffsData.GetFloat(buff, BuffParameter.Value);
 					break;
 			}
-			Buff addBuff = new Buff();
-			addBuff.AddBuff(buff, BuffsData.GetFloat(buff, BuffParameter.Value), BuffsData.GetFloat(buff, BuffParameter.Duration));
-			buffEffects.Add(addBuff);
+			buffEffects.Add(new Buff(buff, BuffsData.GetFloat(buff, BuffParameter.Value), BuffsData.GetFloat(buff, BuffParameter.Duration)));
 		}
 	}
 
@@ -88,6 +85,5 @@ public class BaseProjectile : PooledObject
 				}
 			}
 		}
-
 	}
 }
